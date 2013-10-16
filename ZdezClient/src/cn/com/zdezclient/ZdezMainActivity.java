@@ -7,8 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.net.NetworkInfo.State;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,9 +16,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import cn.com.zdezclient.R;
 import cn.com.zdezclient.activities.BaseActivity;
-import cn.com.zdezclient.activities.LoginActivity;
 import cn.com.zdezclient.activities.NetWorkErrorMsgActivity;
 import cn.com.zdezclient.db.NewsDao;
 import cn.com.zdezclient.db.SchoolMsgDao;
@@ -28,6 +26,7 @@ import cn.com.zdezclient.fragments.NewsFragment;
 import cn.com.zdezclient.fragments.SchoolMsgFragment;
 import cn.com.zdezclient.fragments.SlidingFragment;
 import cn.com.zdezclient.fragments.ZdezMsgFragment;
+import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.services.ZdezService;
 import cn.com.zdezclient.utils.UpdateManager;
@@ -58,7 +57,7 @@ public class ZdezMainActivity extends BaseActivity {
 	private SharedPreferences sp;
 
 	public ZdezMainActivity() {
-		super(R.string.temp_test);
+		super(R.string._column_title_news);
 	}
 
 	@Override
@@ -89,7 +88,7 @@ public class ZdezMainActivity extends BaseActivity {
 		boolean isFromNoti = sp.getBoolean("from_noti", false);
 		Log.d(TAG, "Getted string from notification : " + isFromNoti);
 		if (isFromNoti) {
-			setTitle("校园通知");
+			setTitle(getResources().getString(R.string._column_title_schoolmsg));
 			mContent = new SchoolMsgFragment();
 
 			// 之后又重置
@@ -208,7 +207,8 @@ public class ZdezMainActivity extends BaseActivity {
 	public void toNewsFragment(View view) {
 		Fragment newContent = new NewsFragment();
 		Bundle bundle = new Bundle();
-		bundle.putString("title", "资讯");
+		bundle.putString("title",
+				getResources().getString(R.string._column_title_news));
 		newContent.setArguments(bundle);
 		switchFragment(newContent);
 	}
@@ -216,7 +216,8 @@ public class ZdezMainActivity extends BaseActivity {
 	public void toSchoolMsgFragment(View view) {
 		Fragment newContent = new SchoolMsgFragment();
 		Bundle bundle = new Bundle();
-		bundle.putString("title", "校园通知");
+		bundle.putString("title",
+				getResources().getString(R.string._column_title_schoolmsg));
 		newContent.setArguments(bundle);
 		switchFragment(newContent);
 	}
@@ -224,14 +225,16 @@ public class ZdezMainActivity extends BaseActivity {
 	public void toZdezFragment(View view) {
 		Fragment newContent = new ZdezMsgFragment();
 		Bundle bundle = new Bundle();
-		bundle.putString("title", "找得着");
+		bundle.putString("title",
+				getResources().getString(R.string._column_title_zdezmsg));
 		newContent.setArguments(bundle);
 		switchFragment(newContent);
 	}
 
 	public void toSettingActivity(View view) {
 		Bundle bundle = new Bundle();
-		bundle.putString("title", "设置");
+		bundle.putString("title",
+				getResources().getString(R.string._column_title_setting));
 		Intent intent = new Intent();
 		intent.setClass(this, SettingsActivity.class);
 		startActivity(intent);
@@ -253,7 +256,7 @@ public class ZdezMainActivity extends BaseActivity {
 
 	public void towebsite(View view) {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-				Uri.parse("http://www.zdez.com.cn"));
+				Uri.parse(ZdezHTTPClient.ZDEZ_WEBSITE_URL));
 		startActivity(browserIntent);
 	}
 

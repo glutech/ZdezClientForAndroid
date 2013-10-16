@@ -2,23 +2,12 @@ package cn.com.zdezclient.activities;
 
 import java.sql.Timestamp;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
-
-import cn.com.zdezclient.ActivityContrl;
-import cn.com.zdezclient.R;
-import cn.com.zdezclient.SettingsActivity;
-import cn.com.zdezclient.ZdezMainActivity;
-import cn.com.zdezclient.db.SchoolMsgDao;
-import cn.com.zdezclient.preference.ZdezPreferences;
-import cn.com.zdezclient.types.SchoolMsgVo;
-import cn.com.zdezclient.utils.TimeToWords;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.net.NetworkInfo.State;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -29,6 +18,15 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+import cn.com.zdezclient.ActivityContrl;
+import cn.com.zdezclient.R;
+import cn.com.zdezclient.db.SchoolMsgDao;
+import cn.com.zdezclient.preference.ZdezPreferences;
+import cn.com.zdezclient.types.SchoolMsgVo;
+import cn.com.zdezclient.utils.TimeToWords;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 public class PureTextContentActivity extends SherlockActivity {
 
@@ -49,9 +47,9 @@ public class PureTextContentActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setIcon(
 				getResources().getDrawable(R.drawable.arrow_back));
-		
+
 		ActivityContrl.add(this);
-		
+
 		// 从跳转前的列表中的item中取到对应的信息内容和相关属性
 		Bundle bundle = this.getIntent().getExtras();
 		id = Integer.valueOf(bundle.getString("id"));
@@ -69,7 +67,7 @@ public class PureTextContentActivity extends SherlockActivity {
 		}
 
 		// 显示消息
-		setTitle("校园通知");
+		setTitle(getResources().getString(R.string._column_title_schoolmsg));
 		WebView webview = new WebView(this);
 		setContentView(webview);
 		webview.getSettings().setDefaultTextEncodingName("utf-8");
