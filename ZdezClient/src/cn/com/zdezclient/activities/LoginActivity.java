@@ -22,7 +22,11 @@ import cn.com.zdezclient.Zdez;
 import cn.com.zdezclient.ZdezApplication;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
+<<<<<<< HEAD
 import cn.com.zdezclient.utils.ZdezCharsetUtil;
+=======
+import cn.com.zdezclient.types.User;
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -54,9 +58,15 @@ public class LoginActivity extends Activity {
 		// 设置没有title的界面
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login);
+<<<<<<< HEAD
 
 		ActivityContrl.add(this);
 
+=======
+		
+		ActivityContrl.add(this);
+		
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 		// 注销用户
 		ZdezPreferences.logoutUser(PreferenceManager
 				.getDefaultSharedPreferences(this).edit());
@@ -199,8 +209,11 @@ public class LoginActivity extends Activity {
 		ZdezHTTPClient.post(ZdezHTTPClient.LOGIN_SERVLET_NAME, params,
 				new AsyncHttpResponseHandler() {
 					public void onSuccess(String result) {
+<<<<<<< HEAD
 						result = ZdezCharsetUtil.toUTF8Str(result);
 
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 						// 请求正常返回
 						showProgress(false);
 						if (DEBUG)

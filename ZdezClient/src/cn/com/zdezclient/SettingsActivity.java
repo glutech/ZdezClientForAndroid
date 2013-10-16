@@ -3,10 +3,15 @@ package cn.com.zdezclient;
 import java.util.List;
 
 import android.annotation.TargetApi;
+<<<<<<< HEAD
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.PendingIntent;
+=======
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +34,10 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.util.Log;
+<<<<<<< HEAD
+=======
+import cn.com.zdezclient.R;
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 import cn.com.zdezclient.activities.AboutActivity;
 import cn.com.zdezclient.activities.ModifyPswActivity;
 import cn.com.zdezclient.activities.Whatsnew;
@@ -249,6 +258,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 												ZdezService.class);
 										stopService(toService);
 
+<<<<<<< HEAD
 										PendingIntent restartIntent;
 
 										// 重启应用，因为用户已经注销，所以会直接跳转到登陆界面
@@ -280,6 +290,17 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 										// | Intent.FLAG_ACTIVITY_NEW_TASK);
 										// startActivity(intent);
 										// finish();
+=======
+										Intent intent = new Intent(
+												SettingsActivity.this,
+												ZdezMainActivity.class);
+										intent.putExtra("finish", true);
+										intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+												| Intent.FLAG_ACTIVITY_CLEAR_TASK
+												| Intent.FLAG_ACTIVITY_NEW_TASK);
+										startActivity(intent);
+										finish();
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 										// System.exit(0);
 									}
 								}).show();

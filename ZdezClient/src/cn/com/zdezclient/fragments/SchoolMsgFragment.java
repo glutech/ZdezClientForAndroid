@@ -25,7 +25,10 @@ import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.SchoolMsgVo;
 import cn.com.zdezclient.utils.ToastUtil;
 import cn.com.zdezclient.utils.UriConverter;
+<<<<<<< HEAD
 import cn.com.zdezclient.utils.ZdezCharsetUtil;
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -111,6 +114,7 @@ public class SchoolMsgFragment extends
 
 					@Override
 					public void onSuccess(String arg0) {
+<<<<<<< HEAD
 						String resultUTF8 = ZdezCharsetUtil.toUTF8Str(arg0);
 						if (DEBUG) {
 							Log.d(TAG, "使用String构造转码（utf-8）之后的结果:" + resultUTF8);
@@ -118,6 +122,11 @@ public class SchoolMsgFragment extends
 
 						final Gson gson = new Gson();
 						SchoolMsgVo[] latestMsgs = gson.fromJson(resultUTF8,
+=======
+						System.out.println("~~~~~sccuess:" + arg0);
+						final Gson gson = new Gson();
+						SchoolMsgVo[] latestMsgs = gson.fromJson(arg0,
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 								SchoolMsgVo[].class);
 						Log.d(TAG, "下拉更新得到的新的数组：" + latestMsgs.toString());
 						if (latestMsgs != null && latestMsgs.length > 0) {

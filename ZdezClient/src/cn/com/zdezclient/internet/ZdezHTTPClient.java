@@ -11,7 +11,11 @@ import com.loopj.android.http.RequestParams;
 
 public class ZdezHTTPClient {
 
+<<<<<<< HEAD
 	public static final String HOSTNAME_AND_PORT = "http://192.168.1.222:9080";
+=======
+	public static final String HOSTNAME_AND_PORT = "http://112.117.223.20:9080";
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 	public static final String BASE_URL = HOSTNAME_AND_PORT + "/zdezServer/";
 	public static final String RELATIVE_IMAG_PATH_HEAD = "/zdezServer/attached/image/";
 	public static final String RELATIVE_FILE_PATH_HEAD = "/zdezServer/attached/file/";
@@ -25,7 +29,11 @@ public class ZdezHTTPClient {
 	public static final String LOGIN_SERVLET_NAME = "AndroidClient_StudentLogiCheck";
 	public static final String MODIFY_PASSWORD_SERVLET_NAME = "AndroidClient_ModifyPsw";
 	public static final String ABOUT_US_HTML_PATH = "http://www.zdez.com.cn/about.html";
+<<<<<<< HEAD
 	public static final String CRASH_LOG_PATH_SERVLET_NAME = "AndroidClient_CrashsReport";
+=======
+	public static final String CRASH_LOG_PATH = "http://112.117.223.20:9080/zdezServer/client";
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 

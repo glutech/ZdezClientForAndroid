@@ -25,7 +25,10 @@ import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.NewsVo;
 import cn.com.zdezclient.utils.ToastUtil;
 import cn.com.zdezclient.utils.UriConverter;
+<<<<<<< HEAD
 import cn.com.zdezclient.utils.ZdezCharsetUtil;
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -57,6 +60,10 @@ public class NewsFragment extends
 	private int retainPosition = 0;
 	private int tailPositionNewsId = -1;
 	private boolean isResumeFlag = true;
+<<<<<<< HEAD
+=======
+	private View header;
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 	protected PullToRefreshListView onCreatePullToRefreshListView(
 			LayoutInflater inflater, Bundle savedInstanceState) {
@@ -65,6 +72,10 @@ public class NewsFragment extends
 			Log.d(TAG, "In NewsFragment, Start onCreateView() method");
 		mPTRNewsListView = (PullToRefreshListView) inflater.inflate(
 				R.layout.fragment_news_list, null);
+<<<<<<< HEAD
+=======
+		header = inflater.inflate(R.layout.header_of_outline, null);
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 		mPTRNewsListView.setMode(Mode.BOTH);
 
 		return mPTRNewsListView;
@@ -133,6 +144,7 @@ public class NewsFragment extends
 							Log.d(TAG,
 									"Success on update news request, results is : "
 											+ arg0);
+<<<<<<< HEAD
 
 						String resultUTF8 = ZdezCharsetUtil.toUTF8Str(arg0);
 						if (DEBUG) {
@@ -142,6 +154,11 @@ public class NewsFragment extends
 						// 开始处理跟新得到的数据
 						final Gson gson = new Gson();
 						NewsVo[] latestNews = gson.fromJson(resultUTF8,
+=======
+						// 开始处理跟新得到的数据
+						final Gson gson = new Gson();
+						NewsVo[] latestNews = gson.fromJson(arg0,
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 								NewsVo[].class);
 						if (DEBUG)
 							Log.d(TAG,

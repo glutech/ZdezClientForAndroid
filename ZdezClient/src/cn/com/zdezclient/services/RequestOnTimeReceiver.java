@@ -26,7 +26,10 @@ import cn.com.zdezclient.db.SchoolMsgDao;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.SchoolMsgVo;
+<<<<<<< HEAD
 import cn.com.zdezclient.utils.ZdezCharsetUtil;
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -122,9 +125,12 @@ public class RequestOnTimeReceiver extends BroadcastReceiver {
 							Log.d(TAG,
 									"Finally update news success with result:"
 											+ arg0);
+<<<<<<< HEAD
 
 						arg0 = ZdezCharsetUtil.toUTF8Str(arg0);
 
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 						// 处理请求得到的数据
 						handleResult(arg0);
 						super.onSuccess(arg0);

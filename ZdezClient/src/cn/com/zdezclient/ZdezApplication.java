@@ -1,6 +1,7 @@
 package cn.com.zdezclient;
 
 import java.io.File;
+<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -27,6 +28,31 @@ public class ZdezApplication extends Application {
 	public static ZdezApplication instance;
 
 	// PendingIntent restartIntent;
+=======
+import java.lang.Thread.UncaughtExceptionHandler;
+
+import android.app.AlarmManager;
+import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import cn.com.zdezclient.preference.ZdezPreferences;
+
+public class ZdezApplication extends Application {
+
+	private static final String TAG = "ZdezClient";
+
+	public static final String PACKAGE_NAME = "cn.com.zdez";
+	private String version = null;
+	private SharedPreferences mPrefs;
+	private boolean mIsFirstRun;
+	private Zdez mZdez;
+	public static ZdezApplication instance;
+	PendingIntent restartIntent;
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 	@Override
 	public void onCreate() {
@@ -43,12 +69,20 @@ public class ZdezApplication extends Application {
 		ZdezPreferences.setupDefaults(mPrefs, getResources());
 
 		// 以下用来捕获程序崩溃异常
+<<<<<<< HEAD
 		// Intent intent = new Intent();
 		// // 参数1：包名，参数2：程序入口的activity
 		// intent.setClassName("cn.com.zdezclient",
 		// "cn.com.zdezclient.WelcomeActivity");
 		// restartIntent = PendingIntent.getActivity(getApplicationContext(), 0,
 		// intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+=======
+		Intent intent = new Intent();
+		// 参数1：包名，参数2：程序入口的activity
+		intent.setClassName("cn.com.zdezclient", "cn.com.zdezclient.WelcomeActivity");
+		restartIntent = PendingIntent.getActivity(getApplicationContext(), 0,
+				intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 		Thread.setDefaultUncaughtExceptionHandler(restartHandler); // 程序崩溃时触发线程
 	}
 
@@ -63,7 +97,11 @@ public class ZdezApplication extends Application {
 		return !TextUtils.isEmpty(getUserId());
 	}
 
+<<<<<<< HEAD
 	public static String getUserId() {
+=======
+	public String getUserId() {
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 		return ZdezPreferences.getUserId(mPrefs);
 	}
 
@@ -82,6 +120,7 @@ public class ZdezApplication extends Application {
 	public UncaughtExceptionHandler restartHandler = new UncaughtExceptionHandler() {
 		@Override
 		public void uncaughtException(Thread thread, Throwable ex) {
+<<<<<<< HEAD
 			// AlarmManager mgr = (AlarmManager)
 			// getSystemService(Context.ALARM_SERVICE);
 			// mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
@@ -98,10 +137,16 @@ public class ZdezApplication extends Application {
 			String filename = timestamp + "_user_id_" + user_id + ".log";
 			sendToServer(stacktrace, filename);
 
+=======
+			AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+			mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
+					restartIntent); // 1秒钟后重启应用
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 			ActivityContrl.finishProgram(); // 自定义方法，关闭当前打开的所有avtivity
 		}
 	};
 
+<<<<<<< HEAD
 	private void sendToServer(String stacktrace, String filename) {
 		RequestParams params = new RequestParams();
 		params.put("filename", filename);
@@ -138,4 +183,6 @@ public class ZdezApplication extends Application {
 				});
 	}
 
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 }

@@ -25,7 +25,10 @@ import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.ZdezMsgVo;
 import cn.com.zdezclient.utils.ToastUtil;
 import cn.com.zdezclient.utils.UriConverter;
+<<<<<<< HEAD
 import cn.com.zdezclient.utils.ZdezCharsetUtil;
+=======
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -121,6 +124,7 @@ public class ZdezMsgFragment extends
 							Log.d(TAG,
 									"Success on update news request, results is : "
 											+ arg0);
+<<<<<<< HEAD
 
 						String resultUTF8 = ZdezCharsetUtil.toUTF8Str(arg0);
 						if (DEBUG) {
@@ -130,6 +134,11 @@ public class ZdezMsgFragment extends
 						// 开始处理跟新得到的数据
 						final Gson gson = new Gson();
 						ZdezMsgVo[] latestZdezs = gson.fromJson(resultUTF8,
+=======
+						// 开始处理跟新得到的数据
+						final Gson gson = new Gson();
+						ZdezMsgVo[] latestZdezs = gson.fromJson(arg0,
+>>>>>>> 03b4d0d7f0af036d634c6948ad027e3ca367c378
 								ZdezMsgVo[].class);
 						if (DEBUG)
 							Log.d(TAG,
