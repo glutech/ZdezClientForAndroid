@@ -3,6 +3,7 @@ package cn.com.zdezclient.internet;
 import android.content.Context;
 import android.util.Log;
 
+import cn.com.zdezclient.ZdezApplication;
 import cn.com.zdezclient.preference.ZdezPreferences;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -11,7 +12,7 @@ import com.loopj.android.http.RequestParams;
 
 public class ZdezHTTPClient {
 
-	public static final String HOSTNAME_AND_PORT = "http://192.168.1.222:9080";
+	public static final String HOSTNAME_AND_PORT = "http://112.117.223.20:9080";
 	public static final String BASE_URL = HOSTNAME_AND_PORT + "/zdezServer/";
 	public static final String RELATIVE_IMAG_PATH_HEAD = "/zdezServer/attached/image/";
 	public static final String RELATIVE_FILE_PATH_HEAD = "/zdezServer/attached/file/";
@@ -39,11 +40,18 @@ public class ZdezHTTPClient {
 
 	public static void get(String url, RequestParams params,
 			AsyncHttpResponseHandler responseHandler) {
+		params.put("version_name", ZdezApplication.versionName);
+		client.get(getAbsoluteUrl(url), params, responseHandler);
+	}
+
+	public static void getWithoutVersionName(String url, RequestParams params,
+			AsyncHttpResponseHandler responseHandler) {
 		client.get(getAbsoluteUrl(url), params, responseHandler);
 	}
 
 	public static void post(String url, RequestParams params,
 			AsyncHttpResponseHandler responseHandler) {
+		params.put("version_name", ZdezApplication.versionName);
 		client.post(getAbsoluteUrl(url), params, responseHandler);
 	}
 

@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,6 +24,7 @@ public class ZdezApplication extends Application {
 	public static final String PACKAGE_NAME = "cn.com.zdez";
 	private static SharedPreferences mPrefs;
 	private boolean mIsFirstRun;
+	public static String versionName;
 	private Zdez mZdez;
 	public static ZdezApplication instance;
 
@@ -42,6 +44,8 @@ public class ZdezApplication extends Application {
 		// 设置一些默认值
 		ZdezPreferences.setupDefaults(mPrefs, getResources());
 
+		versionName = getVersionName();
+
 		// 以下用来捕获程序崩溃异常
 		// Intent intent = new Intent();
 		// // 参数1：包名，参数2：程序入口的activity
@@ -49,7 +53,8 @@ public class ZdezApplication extends Application {
 		// "cn.com.zdezclient.WelcomeActivity");
 		// restartIntent = PendingIntent.getActivity(getApplicationContext(), 0,
 		// intent, Intent.FLAG_ACTIVITY_NEW_TASK);
-		Thread.setDefaultUncaughtExceptionHandler(restartHandler); // 程序崩溃时触发线程
+		Thread.setDefaultUncaughtExceptionHandler(stopHandler);
+		// 程序崩溃时触发线程
 	}
 
 	private boolean checkIfIsFirstRun() {
@@ -79,7 +84,7 @@ public class ZdezApplication extends Application {
 		return instance;
 	}
 
-	public UncaughtExceptionHandler restartHandler = new UncaughtExceptionHandler() {
+	public UncaughtExceptionHandler stopHandler = new UncaughtExceptionHandler() {
 		@Override
 		public void uncaughtException(Thread thread, Throwable ex) {
 			// AlarmManager mgr = (AlarmManager)
@@ -95,7 +100,8 @@ public class ZdezApplication extends Application {
 			String stacktrace = result.toString();
 			printWriter.close();
 			String user_id = getUserId();
-			String filename = timestamp + "_user_id_" + user_id + ".log";
+			String filename = timestamp + "_user_id_" + user_id + "_version_"
+					+ versionName + ".log";
 			sendToServer(stacktrace, filename);
 
 			ActivityContrl.finishProgram(); // 自定义方法，关闭当前打开的所有avtivity
@@ -136,6 +142,18 @@ public class ZdezApplication extends Application {
 					}
 
 				});
+	}
+
+	public String getVersionName() {
+		String versionName = null;
+		try {
+			// 获取软件版本号，对应AndroidManifest.xml下android:versionCode
+			versionName = getPackageManager().getPackageInfo(
+					"cn.com.zdezclient", 0).versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return versionName;
 	}
 
 }

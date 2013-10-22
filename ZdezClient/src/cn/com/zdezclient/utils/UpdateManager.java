@@ -96,7 +96,8 @@ public class UpdateManager {
 		final int versionCode = getVersionCode(mContext);
 		if (DEBUG)
 			Log.d(TAG, "Start to request check update in the background");
-		ZdezHTTPClient.get(ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
+		ZdezHTTPClient.getWithoutVersionName(
+				ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
 				new AsyncHttpResponseHandler() {
 
 					@Override
@@ -162,7 +163,8 @@ public class UpdateManager {
 		if (DEBUG)
 			Log.d(TAG, "Start to request check update, the url is: "
 					+ ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME);
-		ZdezHTTPClient.get(ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
+		ZdezHTTPClient.getWithoutVersionName(
+				ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
 				new AsyncHttpResponseHandler() {
 
 					@Override
