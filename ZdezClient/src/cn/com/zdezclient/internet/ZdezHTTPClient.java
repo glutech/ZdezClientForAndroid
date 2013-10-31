@@ -12,7 +12,7 @@ import com.loopj.android.http.RequestParams;
 
 public class ZdezHTTPClient {
 
-	public static final String HOSTNAME_AND_PORT = "http://112.117.223.20:9080";
+	public static final String HOSTNAME_AND_PORT = "http://117.112.223.20:9080";
 	public static final String BASE_URL = HOSTNAME_AND_PORT + "/zdezServer/";
 	public static final String RELATIVE_IMAG_PATH_HEAD = "/zdezServer/attached/image/";
 	public static final String RELATIVE_FILE_PATH_HEAD = "/zdezServer/attached/file/";
