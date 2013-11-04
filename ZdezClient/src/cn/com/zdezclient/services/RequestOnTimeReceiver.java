@@ -55,8 +55,13 @@ public class RequestOnTimeReceiver extends BroadcastReceiver {
 		if (DEBUG)
 			Log.d(TAG, "Getted is notice from preference : " + isNotice);
 
+		if (DEBUG)
+			Log.d(TAG,
+					"Getted userid from preference : "
+							+ ZdezPreferences.getUserId(sp));
+		// 在用户数据没有id的情况下返回“-1”
 		if ((isOnline && isNotice)
-				&& (ZdezPreferences.getUserId(sp) != null && !""
+				&& (ZdezPreferences.getUserId(sp) != null && !"-1"
 						.equals(ZdezPreferences.getUserId(sp)))) {
 			// 进入这个方法需要确定user_id必须存在有效，因为请求消息必须使用它
 			// 收到之后先启动下一个定时器

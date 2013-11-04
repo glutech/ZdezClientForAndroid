@@ -65,7 +65,9 @@ public class ZdezApplication extends Application {
 
 	public boolean isReady() {
 		System.out.println("Is there something wrong!");
-		return !TextUtils.isEmpty(getUserId());
+		boolean flag = !TextUtils.isEmpty(getUserId()) && getUserId() != null
+				&& !"-1".equals(getUserId());
+		return flag;
 	}
 
 	public static String getUserId() {
