@@ -29,7 +29,7 @@
         android:clickable="true"
         android:onClick="towebsite"
         android:padding="10dp"
-        android:src="@drawable/banner" />
+        android:src="@drawable/zdez" />
 
     <TextView
         android:id="@+id/zdez_info"
@@ -55,11 +55,10 @@
             android:id="@+id/net_error_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:onClick="toNetErrorMsg"
             android:text="@string/_connect_error"
             android:textColor="@color/red_light"
-            android:onClick="toNetErrorMsg"
-            android:visibility="invisible"
-             />
+            android:visibility="invisible" />
 
         <RelativeLayout
             android:id="@+id/btn_news"

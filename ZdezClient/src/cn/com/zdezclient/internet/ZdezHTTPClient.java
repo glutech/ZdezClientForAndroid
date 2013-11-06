@@ -27,7 +27,7 @@ public class ZdezHTTPClient {
 	public static final String MODIFY_PASSWORD_SERVLET_NAME = "AndroidClient_ModifyPsw";
 	public static final String ABOUT_US_HTML_PATH = "http://www.zdez.com.cn/about.html";
 	public static final String CRASH_LOG_PATH_SERVLET_NAME = "AndroidClient_CrashsReport";
-	public static final String ZDEZ_WEBSITE_URL = "http://www.zdez.com.cn";
+	public static final String ZDEZ_WEBSITE_URL = "http://www.zdez.cn";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 
