@@ -239,8 +239,10 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 										// 删除账户数据包括数据库
 										ZdezPreferences.logoutUser(sp.edit());
 
-										ZdezDataBaseHelper
-												.deleteAllTableWhileLogout(getApplication());
+										// ZdezDataBaseHelper
+										// .deleteAllTableWhileLogout(getApplication());
+										ZdezDataBaseHelper.getInstance(
+												getApplication()).close();
 
 										// 停止轮询服务
 										Intent toService = new Intent();

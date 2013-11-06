@@ -28,13 +28,13 @@ import cn.com.zdezclient.utils.TimeToWords;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-public class PureTextContentActivity extends SherlockActivity {
+public class SchoolMsgWebViewActivity extends SherlockActivity {
 
 	private int id;
 	private String content;
 	private SchoolMsgDao smd;
 	private SchoolMsgVo msg;
-	private static String TAG = PureTextContentActivity.class.getSimpleName();
+	private static String TAG = SchoolMsgWebViewActivity.class.getSimpleName();
 	private static boolean DEBUG = ZdezPreferences.getDebug();
 
 	@Override

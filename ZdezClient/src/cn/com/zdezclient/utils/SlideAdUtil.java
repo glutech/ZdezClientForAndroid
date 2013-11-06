@@ -1,15 +1,13 @@
 package cn.com.zdezclient.utils;
 
-import org.apache.http.protocol.HTTP;
-
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * 用于侧滑菜单顶部的广告位图片及其URL信息维护更新
@@ -46,33 +44,42 @@ public class SlideAdUtil {
 
 					@Override
 					public void onStart() {
-						// TODO Auto-generated method stub
+						if (DEBUG)
+							Log.d(TAG, "Start to request the new slide ad pic");
 						super.onStart();
 					}
 
 					@Override
 					public void onFinish() {
-						// TODO Auto-generated method stub
+						if (DEBUG)
+							Log.d(TAG,
+									"Finished requesting the new slide ad pic");
 						super.onFinish();
 					}
 
 					@Override
 					public void onSuccess(String content) {
-						// TODO Auto-generated method stub
+						if (DEBUG)
+							Log.d(TAG,
+									"Succesed get the new slide ad pic, and the result is:"
+											+ content);
 						super.onSuccess(content);
 					}
 
 					@Override
 					public void onFailure(Throwable error, String content) {
-						// TODO Auto-generated method stub
+						if (DEBUG)
+							Log.d(TAG,
+									"Failed while request the new slide ad pic, and the reason is :"
+											+ content);
 						super.onFailure(error, content);
 					}
-					
+
 				});
 	}
 
 	/**
-	 * 从设置文件中取出客户端目前广告图片的版本，若是没有这个设置（之前没有写入过，首次使用等） 则默认为0，使用默认的图片
+	 * 从设置文件中取出客户端目前广告图片的版本，若是没有这个设置（之前没有写入过，首次使用等）则默认为0，使用默认的图片
 	 * 
 	 * @param context
 	 * @return

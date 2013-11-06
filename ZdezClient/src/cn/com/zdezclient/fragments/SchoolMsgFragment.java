@@ -17,7 +17,7 @@ import android.widget.TextView;
 import cn.com.zdezclient.R;
 import cn.com.zdezclient.Zdez;
 import cn.com.zdezclient.ZdezApplication;
-import cn.com.zdezclient.activities.PureTextContentActivity;
+import cn.com.zdezclient.activities.SchoolMsgWebViewActivity;
 import cn.com.zdezclient.adapter.SchoolMsgListAdapter;
 import cn.com.zdezclient.db.SchoolMsgDao;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
@@ -354,7 +354,7 @@ public class SchoolMsgFragment extends
 		toShowContent.putExtras(bundle);
 		isResumeFlag = true;
 
-		toShowContent.setClass(getActivity(), PureTextContentActivity.class);
+		toShowContent.setClass(getActivity(), SchoolMsgWebViewActivity.class);
 		startActivity(toShowContent);
 	}
 
