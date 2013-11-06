@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import cn.com.zdezclient.ZdezApplication;
 import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.SchoolMsgVo;
 import cn.com.zdezclient.utils.UriConverter;
@@ -17,10 +18,11 @@ public class SchoolMsgDao {
 	private SQLiteDatabase db;
 	private ZdezDataBaseHelper zdezDBHelper;
 	private String TAG = SchoolMsgDao.class.getSimpleName();
+	private final static String userId = ZdezApplication.getUserId();
 	private boolean DEBUG = ZdezPreferences.getDebug();
 
 	public SchoolMsgDao(Context context) {
-		this.zdezDBHelper = ZdezDataBaseHelper.getInstance(context);
+		this.zdezDBHelper = ZdezDataBaseHelper.getInstance(context, userId);
 		this.db = zdezDBHelper.getWritableDatabase();
 	}
 
@@ -94,7 +96,7 @@ public class SchoolMsgDao {
 				+ "schoolMsgContent, " + "schoolMsgDate, "
 				+ "schoolMsgSchoolName, " + "schoolMsgSenderName, "
 				+ "schoolMsgReadStatus, " + "schoolMsgCover, schoolMsgRemarks "
-				+ "from SchoolMsg " + "order by schoolMsgDate desc";
+				+ "from SchoolMsg order by schoolMsgDate desc";
 		Cursor cursor = db.rawQuery(sql, null);
 
 		if (cursor.moveToFirst()) {
@@ -177,7 +179,7 @@ public class SchoolMsgDao {
 					+ "schoolMsgContent, " + "schoolMsgDate, "
 					+ "schoolMsgSchoolName, " + "schoolMsgSenderName, "
 					+ "schoolMsgReadStatus, " + "schoolMsgCover "
-					+ "from SchoolMsg " + "order by schoolMsgDate desc limit "
+					+ "from SchoolMsg order by schoolMsgDate desc limit "
 					+ count;
 
 		} else {
@@ -234,8 +236,7 @@ public class SchoolMsgDao {
 	public int getUnreadSchoolMsgCount() {
 		int count = 0;
 
-		String query = "select count(schoolMsgId) from SchoolMsg "
-				+ "where schoolMsgReadStatus=0";
+		String query = "select count(schoolMsgId) from SchoolMsg where schoolMsgReadStatus=0";
 
 		Cursor cursor = db.rawQuery(query, null);
 		if (cursor.moveToFirst()) {
@@ -253,8 +254,7 @@ public class SchoolMsgDao {
 	public int getUnreadNewsCount() {
 		int count = 0;
 
-		String query = "select count(schoolMsgId) from SchoolMsg "
-				+ "where schoolMsgReadStatus=0 and type='news'";
+		String query = "select count(schoolMsgId) from SchoolMsg where schoolMsgReadStatus=0 and type='news'";
 
 		Cursor cursor = db.rawQuery(query, null);
 		if (cursor.moveToFirst()) {

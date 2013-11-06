@@ -74,7 +74,7 @@
 
         <activity
             android:name="cn.com.zdezclient.activities.SchoolMsgWebViewActivity"
-            android:label="@string/title_activity_pure_text_content" >
+            android:label="@string/title_activity_school_msg_web_view" >
         </activity>
 
         <service

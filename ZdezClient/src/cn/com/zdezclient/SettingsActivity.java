@@ -241,8 +241,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 										// ZdezDataBaseHelper
 										// .deleteAllTableWhileLogout(getApplication());
-										ZdezDataBaseHelper.getInstance(
-												getApplication()).close();
+										// ZdezDataBaseHelper.getInstance(
+										// getApplication()).close();
 
 										// 停止轮询服务
 										Intent toService = new Intent();

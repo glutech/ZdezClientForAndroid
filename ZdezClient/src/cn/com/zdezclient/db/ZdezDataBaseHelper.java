@@ -9,10 +9,8 @@ import android.util.Log;
 
 public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 
-	// 对于不同的用户id，创建不同的数据库，
-	private final static String DATABASE_NAME = "cn_com_zdez_"
-			+ ZdezPreferences.getUserId(ZdezApplication.getInstance()
-					.getPrefs()) + ".db";
+	private final static String DATABASE_NAME = "cn_com_zdez";
+	private final static String userId = ZdezApplication.getUserId();
 	private final static int DATABASE_VERSION = 3;
 	private volatile static ZdezDataBaseHelper zdezDBInstance;
 	private final static String TAG = ZdezDataBaseHelper.class.getSimpleName();
@@ -24,19 +22,20 @@ public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 	 * @param context
 	 * @return
 	 */
-	public static ZdezDataBaseHelper getInstance(Context context) {
+	public static ZdezDataBaseHelper getInstance(Context context, String id) {
 		if (zdezDBInstance == null) {
 			synchronized (ZdezDataBaseHelper.class) {
 				if (zdezDBInstance == null) {
-					zdezDBInstance = new ZdezDataBaseHelper(context);
+					zdezDBInstance = new ZdezDataBaseHelper(context, id);
 				}
 			}
 		}
 		return zdezDBInstance;
 	}
 
-	public ZdezDataBaseHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	public ZdezDataBaseHelper(Context context, String id) {
+		// 为不同的用户建立不同的数据库
+		super(context, DATABASE_NAME + id + ".db", null, DATABASE_VERSION);
 	}
 
 	/**
@@ -70,6 +69,7 @@ public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 			// db.execSQL("ALTER TABLE SchoolMsg ADD COLUMN userId TEXT");
 			// db.execSQL("ALTER TABLE News ADD COLUMN userId TEXT");
 			// db.execSQL("ALTER TABLE ZdezMsg ADD COLUMN userId TEXT");
+			// 在每个表里面添加一个用于置顶消息的标志位
 			db.execSQL("ALTER TABLE SchoolMsg ADD COLUMN schoolMsgTop INTEGER");
 			db.execSQL("ALTER TABLE News ADD COLUMN newsTop INTEGER");
 			db.execSQL("ALTER TABLE ZdezMsg ADD COLUMN zdezTop INTEGER");
@@ -82,6 +82,7 @@ public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 			// db.execSQL("ALTER TABLE SchoolMsg ADD COLUMN userId TEXT");
 			// db.execSQL("ALTER TABLE News ADD COLUMN userId TEXT");
 			// db.execSQL("ALTER TABLE ZdezMsg ADD COLUMN userId TEXT");
+			// 在每个表里面添加一个用于置顶消息的标志位
 			db.execSQL("ALTER TABLE SchoolMsg ADD COLUMN schoolMsgTop INTEGER");
 			db.execSQL("ALTER TABLE News ADD COLUMN newsTop INTEGER");
 			db.execSQL("ALTER TABLE ZdezMsg ADD COLUMN zdezTop INTEGER");
@@ -94,12 +95,12 @@ public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 
 	}
 
-	public static void deleteAllTableWhileLogout(Context context) {
-		SQLiteDatabase db = getInstance(context).getWritableDatabase();
-		db.delete("SchoolMsg", null, null);
-		db.delete("News", null, null);
-		db.delete("ZdezMsg", null, null);
-	}
+	// public static void deleteAllTableWhileLogout(Context context) {
+	// SQLiteDatabase db = getInstance(context).getWritableDatabase();
+	// db.delete("SchoolMsg", null, null);
+	// db.delete("News", null, null);
+	// db.delete("ZdezMsg", null, null);
+	// }
 
 	/**
 	 * 创建学校信息表
@@ -118,7 +119,7 @@ public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 	}
 
 	private void createNewsTable(SQLiteDatabase db) {
-		String sql = "CREATE TABLE IF NOT EXISTS News ("
+		String sql = "CREATE TABLE IF NOT EXISTS News("
 				+ "newsId INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ "newsTitle TEXT," + "newsContent TEXT,"
 				+ "newsDate timestamp," + "newsReadStatus INTEGER, "
@@ -127,7 +128,7 @@ public class ZdezDataBaseHelper extends SQLiteOpenHelper {
 	}
 
 	private void createZdezTable(SQLiteDatabase db) {
-		String sql = "CREATE TABLE IF NOT EXISTS ZdezMsg ("
+		String sql = "CREATE TABLE IF NOT EXISTS ZdezMsg("
 				+ "zdezId INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ "zdezTitle TEXT," + "zdezContent TEXT,"
 				+ "zdezDate timestamp," + "zdezReadStatus INTEGER,"
