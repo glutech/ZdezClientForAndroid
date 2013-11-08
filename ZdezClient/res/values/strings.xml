@@ -6,7 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_welcome">找得着</string>
     <string name="title_activity_async_login">AsyncLoginActivity</string>
-    <string name="title_activity_pure_text_content">PureTextContentActivity</string>
+    <string name="title_activity_school_msg_web_view">PureTextContentActivity</string>
     <string name="zdez_service_label">找得着通知服务</string>
     <string name="title_activity_news_web_view">NewsWebViewActivity</string>
     <string name="title_activity_zdez_msg_web_view">ZdezMsgWebViewActivity</string>

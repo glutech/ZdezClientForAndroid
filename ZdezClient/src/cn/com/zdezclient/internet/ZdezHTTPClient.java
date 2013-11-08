@@ -27,7 +27,12 @@ public class ZdezHTTPClient {
 	public static final String MODIFY_PASSWORD_SERVLET_NAME = "AndroidClient_ModifyPsw";
 	public static final String ABOUT_US_HTML_PATH = "http://www.zdez.com.cn/about.html";
 	public static final String CRASH_LOG_PATH_SERVLET_NAME = "AndroidClient_CrashsReport";
+<<<<<<< HEAD
 	public static final String ZDEZ_WEBSITE_URL = "http://www.zdez.cn";
+=======
+	public static final String ZDEZ_WEBSITE_URL = "http://www.zdez.com.cn";
+	public static final String ZDEZ_WEBSITE_AD_PIC_UPDATE_URL = "http://www.zdez.cn/check_new_ad_for_client";
+>>>>>>> RemoveAsyncHTTPLib
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 

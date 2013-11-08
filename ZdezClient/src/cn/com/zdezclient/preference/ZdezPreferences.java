@@ -20,6 +20,7 @@ public class ZdezPreferences {
 	private static final String PREFERENCE_MAJOR = "major";
 	private static final String PREFERENCE_GRADE = "grade";
 	private static final String PREFERENCE_LATEST_SCHOOL_MSG_ID = "latest_school_msg_id";
+	private static final String PREFERENCE_NOW_AD_PIC_NUMBER = "now_ad_pic_number";
 	// private static final String PREFERENCE_BIRTHDATE = "birthdate";
 	private static final String PREFERENCE_GENDER = "gender";
 	private static final boolean DEBUG = true;
@@ -37,7 +38,10 @@ public class ZdezPreferences {
 	}
 
 	public static String getUserId(SharedPreferences prefs) {
-		return prefs.getString(PREFERENCE_ID, null);
+		String id = prefs.getString(PREFERENCE_ID, "-1");
+		if (DEBUG)
+			Log.d(TAG, "获取用户id:" + id);
+		return id;
 	}
 
 	public static boolean setUser(Zdez zdez, String result, Editor editor) {
@@ -51,7 +55,7 @@ public class ZdezPreferences {
 				Log.d(TAG, "存储用户数据时commit失败");
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -135,4 +139,19 @@ public class ZdezPreferences {
 		e.commit();
 	}
 
+	public static int getNowAdPicNumber(SharedPreferences sp) {
+		return sp.getInt(PREFERENCE_NOW_AD_PIC_NUMBER, 0);
+	}
+
+	public static boolean setNowAdPicNumber(SharedPreferences sp, int newNumber) {
+		Editor edit = sp.edit();
+		edit.putInt(PREFERENCE_NOW_AD_PIC_NUMBER, newNumber);
+		if (edit.commit()) {
+			if (DEBUG)
+				Log.d(TAG, "成功将新的slide_adPicNumber更新");
+			return true;
+		}
+		Log.d(TAG, "新的slide_adPicNumber更新失败");
+		return false;
+	}
 }

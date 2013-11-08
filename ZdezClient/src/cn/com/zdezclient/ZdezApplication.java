@@ -53,7 +53,8 @@ public class ZdezApplication extends Application {
 		// "cn.com.zdezclient.WelcomeActivity");
 		// restartIntent = PendingIntent.getActivity(getApplicationContext(), 0,
 		// intent, Intent.FLAG_ACTIVITY_NEW_TASK);
-		Thread.setDefaultUncaughtExceptionHandler(stopHandler);
+		if (!ZdezPreferences.getDebug())
+			Thread.setDefaultUncaughtExceptionHandler(stopHandler);
 		// 程序崩溃时触发线程
 	}
 
@@ -65,7 +66,9 @@ public class ZdezApplication extends Application {
 
 	public boolean isReady() {
 		System.out.println("Is there something wrong!");
-		return !TextUtils.isEmpty(getUserId());
+		boolean flag = !TextUtils.isEmpty(getUserId()) && getUserId() != null
+				&& !"-1".equals(getUserId());
+		return flag;
 	}
 
 	public static String getUserId() {
