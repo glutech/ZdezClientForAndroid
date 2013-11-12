@@ -8,6 +8,15 @@ public class NewsVo {
 	private String date;
 	private String coverPath;
 	private int readStatus;
+	private int isTop;
+
+	public int getIsTop() {
+		return isTop;
+	}
+
+	public void setIsTop(int isTop) {
+		this.isTop = isTop;
+	}
 
 	public int getId() {
 		return id;
