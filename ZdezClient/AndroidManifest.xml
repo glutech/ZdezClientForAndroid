@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.com.zdezclient"
     android:versionCode="1"
-    android:versionName="1.001" >
+    android:versionName="V1.001" >
 
     <uses-sdk android:minSdkVersion="8" />
 
@@ -73,8 +73,8 @@
         </receiver>
 
         <activity
-            android:name="cn.com.zdezclient.activities.PureTextContentActivity"
-            android:label="@string/title_activity_pure_text_content" >
+            android:name="cn.com.zdezclient.activities.SchoolMsgWebViewActivity"
+            android:label="@string/title_activity_school_msg_web_view" >
         </activity>
 
         <service

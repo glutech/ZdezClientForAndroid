@@ -212,6 +212,52 @@ public class NewsFragment extends
 				});
 	}
 
+	/**
+	 * 在更新新消息的异步请求之后“处理”得到的数据，再更新界面，因为这个处理过程比较耗时，所以不能放在ui主线程中，这使得更新这个过程有两次“同步”
+	 * 的异步操作
+	 * 
+	 * @author werther
+	 * 
+	 */
+	private class ResponseFromUpdateHandler extends
+			AsyncTask<String, Void, Void> {
+
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+	}
+
+	/**
+	 * 先试着写写用于做列表更新的异步任务，需要配合着网络请求来做，在后台做得任务包括：网络请求返回数据，数据uri转换，数据存储，top
+	 * item数据处理
+	 * 
+	 * @author werther
+	 * 
+	 */
+	private class UpdateTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// 在这里处理后台操作
+			// 首先发起网络请求，这个请求返回
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// 在这里做一些ui主线程更新的操作，得到最新的列表，然后添加到现有的列表前面
+			// 包括两种情况：
+			// 一.新列表里含有最新的置顶消息，这样直接把这个列表添加到顶部就ok
+			// 二.新列表里面没有喊着新的置顶消息，置顶消息还是现有的，这样就要将这个新的列表插入到现有列表的置顶消息后面，即从index=1插入
+			
+			super.onPostExecute(result);
+		}
+
+	}
+
 	private class LoadMoreData extends
 			AsyncTask<Void, Void, LinkedList<NewsVo>> {
 

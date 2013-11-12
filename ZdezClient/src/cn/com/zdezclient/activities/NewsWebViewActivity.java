@@ -60,7 +60,7 @@ public class NewsWebViewActivity extends SherlockActivity {
 				+ "</font><br><br>" + content;
 
 		// 显示消息
-		setTitle("新闻资讯");
+		setTitle(getResources().getString(R.string._column_title_news));
 		WebView webview = new WebView(this);
 		setContentView(webview);
 		webview.getSettings().setDefaultTextEncodingName("utf-8");

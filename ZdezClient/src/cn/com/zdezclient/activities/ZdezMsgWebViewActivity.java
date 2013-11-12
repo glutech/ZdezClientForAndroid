@@ -6,15 +6,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.net.NetworkInfo.State;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -63,7 +63,7 @@ public class ZdezMsgWebViewActivity extends SherlockActivity {
 		sender = bundle.getString("sender");
 
 		// 显示消息
-		setTitle("找得着");
+		setTitle(getResources().getString(R.string._column_title_zdezmsg));
 		WebView webview = new WebView(this);
 		setContentView(webview);
 		webview.getSettings().setDefaultTextEncodingName("utf-8");

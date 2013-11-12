@@ -38,9 +38,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
- * @author coolszy
- * @date 2012-4-26
- * @blog http://blog.92coding.com
+ * @author werther
+ * @date 2013-9-23 用于检查客户端版本更新
  */
 
 public class UpdateManager {
@@ -90,13 +89,14 @@ public class UpdateManager {
 	}
 
 	/**
-	 * 检测软件更新
+	 * 检测软件更新 每次打开程序自动进行检查时调用
 	 */
 	public void checkUpdate() {
 		final int versionCode = getVersionCode(mContext);
 		if (DEBUG)
 			Log.d(TAG, "Start to request check update in the background");
-		ZdezHTTPClient.get(ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
+		ZdezHTTPClient.getWithoutVersionName(
+				ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
 				new AsyncHttpResponseHandler() {
 
 					@Override
@@ -150,7 +150,7 @@ public class UpdateManager {
 	}
 
 	/**
-	 * 检查软件是否有更新版本
+	 * 检查软件是否有更新版本 在设置中手动检查程序更新时调用
 	 * 
 	 * @return
 	 */
@@ -162,7 +162,8 @@ public class UpdateManager {
 		if (DEBUG)
 			Log.d(TAG, "Start to request check update, the url is: "
 					+ ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME);
-		ZdezHTTPClient.get(ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
+		ZdezHTTPClient.getWithoutVersionName(
+				ZdezHTTPClient.CHECK_APK_UPDATE_SERVLET_NAME, null,
 				new AsyncHttpResponseHandler() {
 
 					@Override

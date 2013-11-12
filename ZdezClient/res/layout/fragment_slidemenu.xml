@@ -13,7 +13,7 @@
         android:background="@drawable/slide_bar"
         android:gravity="center"
         android:padding="2dp"
-        android:text="用户名"
+        android:text="@string/_user_name_placeholder"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:clickable="true"
         android:onClick="towebsite"
         android:padding="10dp"
-        android:src="@drawable/banner" />
+        android:src="@drawable/zdez" />
 
     <TextView
         android:id="@+id/zdez_info"
@@ -40,7 +40,7 @@
         android:layout_marginTop="3dp"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:text="Powered by 昆明博客科技"
+        android:text="@string/powered_by"
         android:textColor="@color/white" />
     <!-- 新闻资讯 -->
 
@@ -55,11 +55,10 @@
             android:id="@+id/net_error_info"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="！！网络连接错误！！"
-            android:textColor="@color/red_light"
             android:onClick="toNetErrorMsg"
-            android:visibility="invisible"
-             />
+            android:text="@string/_connect_error"
+            android:textColor="@color/red_light"
+            android:visibility="invisible" />
 
         <RelativeLayout
             android:id="@+id/btn_news"
@@ -85,7 +84,7 @@
                 android:layout_toRightOf="@id/slide_icon_news"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="资讯"
+                android:text="@string/_column_title_news"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -127,7 +126,7 @@
                 android:layout_toRightOf="@id/slide_icon_msg"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="校园通知"
+                android:text="@string/_column_title_schoolmsg"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -170,7 +169,7 @@
                 android:layout_toRightOf="@id/slide_icon_zdez"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="找得着"
+                android:text="@string/_column_title_zdezmsg"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -213,7 +212,7 @@
                 android:layout_toRightOf="@id/slide_icon_setting"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="设置"
+                android:text="@string/_column_title_setting"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </RelativeLayout>

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import cn.com.zdezclient.ZdezApplication;
 import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.NewsVo;
 import cn.com.zdezclient.utils.UriConverter;
@@ -17,10 +18,11 @@ public class NewsDao {
 	private SQLiteDatabase db;
 	private ZdezDataBaseHelper zdezDBHelper;
 	private String TAG = NewsDao.class.getSimpleName();
+	private final static String userId = ZdezApplication.getUserId();
 	private boolean DEBUG = ZdezPreferences.getDebug();
 
 	public NewsDao(Context context) {
-		this.zdezDBHelper = ZdezDataBaseHelper.getInstance(context);
+		this.zdezDBHelper = ZdezDataBaseHelper.getInstance(context, userId);
 		this.db = zdezDBHelper.getReadableDatabase();
 	}
 
@@ -43,6 +45,7 @@ public class NewsDao {
 		cv.put("newsContent", UriConverter.replaceSrc(news.getContent()));
 		cv.put("newsDate", news.getDate());
 		cv.put("newsReadStatus", news.getReadStatus());
+		cv.put("newsTop", news.getIsTop());
 		if (news.getCoverPath() != null && !news.getCoverPath().equals(""))
 			cv.put("newsCover",
 					UriConverter.replaceCoverPath(news.getCoverPath()));
@@ -71,7 +74,7 @@ public class NewsDao {
 		LinkedList<NewsVo> newsList = new LinkedList<NewsVo>();
 		String sql = "select newsId as _id, "
 				+ "newsTitle, newsContent, newsDate, "
-				+ "newsReadStatus, newsCover"
+				+ "newsReadStatus, newsCover, newsTop"
 				+ " from News order by newsDate desc";
 		Cursor cursor = db.rawQuery(sql, null);
 
@@ -85,6 +88,7 @@ public class NewsDao {
 			newsItem.setDate(cursor.getString(3));
 			newsItem.setReadStatus(cursor.getInt(4));
 			newsItem.setCoverPath(cursor.getString(5));
+			newsItem.setIsTop(cursor.getInt(6));
 			newsList.add(newsItem);
 			while (cursor.moveToNext()) {
 				NewsVo newsItem2 = new NewsVo();
@@ -94,6 +98,7 @@ public class NewsDao {
 				newsItem2.setDate(cursor.getString(3));
 				newsItem2.setReadStatus(cursor.getInt(4));
 				newsItem2.setCoverPath(cursor.getString(5));
+				newsItem2.setIsTop(cursor.getInt(6));
 				newsList.add(newsItem2);
 			}
 		}
@@ -114,12 +119,12 @@ public class NewsDao {
 		if (start == -1) {
 			sql = "select newsId as _id, "
 					+ "newsTitle, newsContent, newsDate, "
-					+ "newsReadStatus, newsCover"
+					+ "newsReadStatus, newsCover, newsTop"
 					+ " from News order by newsDate desc limit " + count;
 		} else {
 			sql = "select newsId as _id, "
 					+ "newsTitle, newsContent, newsDate, "
-					+ "newsReadStatus, newsCover" + " from News where newsId<"
+					+ "newsReadStatus, newsCover, newsTop" + " from News where newsId<"
 					+ start + " order by newsDate desc limit " + count;
 		}
 
@@ -135,6 +140,7 @@ public class NewsDao {
 			newsItem.setDate(cursor.getString(3));
 			newsItem.setReadStatus(cursor.getInt(4));
 			newsItem.setCoverPath(cursor.getString(5));
+			newsItem.setIsTop(cursor.getInt(6));
 			newsList.add(newsItem);
 			while (cursor.moveToNext()) {
 				NewsVo newsItem2 = new NewsVo();
@@ -144,6 +150,7 @@ public class NewsDao {
 				newsItem2.setDate(cursor.getString(3));
 				newsItem2.setReadStatus(cursor.getInt(4));
 				newsItem2.setCoverPath(cursor.getString(5));
+				newsItem2.setIsTop(cursor.getInt(6));
 				newsList.add(newsItem2);
 			}
 		}
@@ -159,8 +166,7 @@ public class NewsDao {
 	public int getUnreadNewsCount() {
 		int count = 0;
 
-		String query = "select count(newsId) from News "
-				+ "where newsReadStatus=0";
+		String query = "select count(newsId) from News where newsReadStatus=0";
 
 		Cursor cursor = db.rawQuery(query, null);
 		if (cursor.moveToFirst()) {

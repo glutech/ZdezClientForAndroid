@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import cn.com.zdezclient.ZdezApplication;
 import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.ZdezMsgVo;
 import cn.com.zdezclient.utils.UriConverter;
@@ -18,9 +19,10 @@ public class ZdezMsgDao {
 	private ZdezDataBaseHelper zdezDBHelper;
 	private String TAG = ZdezMsgDao.class.getSimpleName();
 	private boolean DEBUG = ZdezPreferences.getDebug();
+	private final static String userId = ZdezApplication.getUserId();
 
 	public ZdezMsgDao(Context context) {
-		this.zdezDBHelper = ZdezDataBaseHelper.getInstance(context);
+		this.zdezDBHelper = ZdezDataBaseHelper.getInstance(context, userId);
 		this.db = zdezDBHelper.getReadableDatabase();
 	}
 
@@ -142,8 +144,7 @@ public class ZdezMsgDao {
 	public int getUnreadZdezCount() {
 		int count = 0;
 
-		String query = "select count(zdezId) from ZdezMsg "
-				+ "where zdezReadStatus=0";
+		String query = "select count(zdezId) from ZdezMsg where zdezReadStatus=0";
 
 		Cursor cursor = db.rawQuery(query, null);
 		if (cursor.moveToFirst()) {
