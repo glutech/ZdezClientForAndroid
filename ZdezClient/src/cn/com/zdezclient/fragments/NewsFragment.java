@@ -139,74 +139,58 @@ public class NewsFragment extends
 							Log.d(TAG, "使用String构造转码（utf-8）之后的结果:" + resultUTF8);
 						}
 
-						// 开始处理跟新得到的数据
-						final Gson gson = new Gson();
-						NewsVo[] latestNews = gson.fromJson(resultUTF8,
-								NewsVo[].class);
-						if (DEBUG)
-							Log.d(TAG,
-									"下拉刷新取得的新闻资讯的数组：" + latestNews.toString());
+						new ResponseFromUpdateHandler().execute(resultUTF8);
 
-						if (latestNews != null && latestNews.length > 0) {
-							for (int i = latestNews.length - 1; i >= 0; i--) {
-								NewsVo news = latestNews[i];
-								news.setCoverPath(UriConverter
-										.replaceCoverPath(news.getCoverPath()));
-								news.setContent(UriConverter.replaceSrc(news
-										.getContent()));
-								newsList.addFirst(news);
-							}
-							// 通知列表数据有更新，需要刷新
-							adapter.notifyDataSetChanged();
-
-							LinkedList<NewsVo> latestNewsList = new LinkedList<NewsVo>();
-							latestNewsList.addAll(Arrays.asList(latestNews));
-
-							// 存入
-							newsDao.createNewsList(latestNewsList);
-
-							// 收到确认
-							Zdez.acknowledgeNews(newsList, prefs);
-
-							// 提示刷新了几条新的信息
-							ToastUtil.showShortToast(getActivity(), "加载了"
-									+ latestNewsList.size() + "条新信息");
-							// Toast.makeText(
-							// (ZdezApplication) getActivity()
-							// .getApplication(),
-							// "加载了" + latestNewsList.size() + "条新信息",
-							// Toast.LENGTH_SHORT).show();
-							setUnreadCountBadge();
-							// Toast toast = Toast.makeText(getActivity(), "加载了"
-							// + latestNewsList.size() + "条新信息",
-							// Toast.LENGTH_SHORT);
-							// toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 0);
-							// toast.show();
-						} else if ("[]".equals(arg0)) {
-							// Toast.makeText(
-							// (ZdezApplication) getActivity()
-							// .getApplication(), "没有新信息",
-							// Toast.LENGTH_SHORT).show();
-							ToastUtil.showShortToast(getActivity(), "没有新信息");
-							// Toast toast = Toast.makeText(
-							// (ZdezApplication) getActivity()
-							// .getApplication(), "没有新信息",
-							// Toast.LENGTH_SHORT);
-							// toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 0);
-							// toast.show();
-							if (DEBUG)
-								Log.d("SchoolMsgFragment", "Get latest error");
-						} else {
-							// Toast.makeText(
-							// (ZdezApplication) getActivity()
-							// .getApplication(), "网络错误，请检查网络连接",
-							// Toast.LENGTH_SHORT).show();
-							ToastUtil.showShortToast(getActivity(),
-									"网络错误，请检查网络连接");
-							Log.d(TAG, "Get latest error");
-						}
-
+						/*
+						 * // 开始处理跟新得到的数据 final Gson gson = new Gson(); NewsVo[]
+						 * latestNews = gson.fromJson(resultUTF8,
+						 * NewsVo[].class); if (DEBUG) Log.d(TAG,
+						 * "下拉刷新取得的新闻资讯的数组：" + latestNews.toString());
+						 * 
+						 * if (latestNews != null && latestNews.length > 0) {
+						 * for (int i = latestNews.length - 1; i >= 0; i--) {
+						 * NewsVo news = latestNews[i];
+						 * news.setCoverPath(UriConverter
+						 * .replaceCoverPath(news.getCoverPath()));
+						 * news.setContent(UriConverter.replaceSrc(news
+						 * .getContent())); newsList.addFirst(news); } //
+						 * 通知列表数据有更新，需要刷新 adapter.notifyDataSetChanged();
+						 * 
+						 * LinkedList<NewsVo> latestNewsList = new
+						 * LinkedList<NewsVo>();
+						 * latestNewsList.addAll(Arrays.asList(latestNews));
+						 * 
+						 * // 存入 newsDao.createNewsList(latestNewsList);
+						 * 
+						 * // 收到确认 Zdez.acknowledgeNews(newsList, prefs);
+						 * 
+						 * // 提示刷新了几条新的信息
+						 * ToastUtil.showShortToast(getActivity(), "加载了" +
+						 * latestNewsList.size() + "条新信息"); // Toast.makeText(
+						 * // (ZdezApplication) getActivity() //
+						 * .getApplication(), // "加载了" + latestNewsList.size() +
+						 * "条新信息", // Toast.LENGTH_SHORT).show();
+						 * setUnreadCountBadge(); // Toast toast =
+						 * Toast.makeText(getActivity(), "加载了" // +
+						 * latestNewsList.size() + "条新信息", //
+						 * Toast.LENGTH_SHORT); //
+						 * toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 0); //
+						 * toast.show(); } else if ("[]".equals(arg0)) { //
+						 * Toast.makeText( // (ZdezApplication) getActivity() //
+						 * .getApplication(), "没有新信息", //
+						 * Toast.LENGTH_SHORT).show();
+						 * ToastUtil.showShortToast(getActivity(), "没有新信息"); //
+						 * Toast toast = Toast.makeText( // (ZdezApplication)
+						 * getActivity() // .getApplication(), "没有新信息", //
+						 * Toast.LENGTH_SHORT); //
+						 * toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 0); //
+						 * toast.show(); if (DEBUG) Log.d("SchoolMsgFragment",
+						 * "Get latest error"); } else {
+						 * ToastUtil.showShortToast(getActivity(),
+						 * "网络错误，请检查网络连接"); Log.d(TAG, "Get latest error"); }
+						 */
 						super.onSuccess(arg0);
+
 					}
 
 				});
@@ -220,12 +204,79 @@ public class NewsFragment extends
 	 * 
 	 */
 	private class ResponseFromUpdateHandler extends
-			AsyncTask<String, Void, Void> {
+			AsyncTask<String, Void, Integer> {
 
 		@Override
-		protected Void doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
+		protected Integer doInBackground(String... params) {
+			// 开始处理跟新得到的数据
+			final Gson gson = new Gson();
+			NewsVo[] latestNews = gson.fromJson(params[0], NewsVo[].class);
+			if (DEBUG)
+				Log.d(TAG, "下拉刷新取得的新闻资讯的数组：" + latestNews.toString());
+
+			if (latestNews != null && latestNews.length > 0) {
+				NewsVo topNews = null;
+				for (int i = latestNews.length - 1; i >= 0; i--) {
+					NewsVo news = latestNews[i];
+					news.setCoverPath(UriConverter.replaceCoverPath(news
+							.getCoverPath()));
+					news.setContent(UriConverter.replaceSrc(news.getContent()));
+					// 检查新更新的消息里面有没有需要置顶的消息，有的话，需要更新数据库中的最新的置顶消息
+					if (news.getIsTop() == 1) {
+						// 不需要在此添加到列表中
+						topNews = news;
+					} else {
+						newsList.addFirst(news);
+					}
+
+				}
+
+				LinkedList<NewsVo> latestNewsList = new LinkedList<NewsVo>();
+				latestNewsList.addAll(Arrays.asList(latestNews));
+
+				if (DEBUG)
+					Log.d(TAG, "Updated messages after get rid of topnews :"
+							+ latestNewsList.toString()
+							+ "AND the topnews now is : " + topNews);
+				// 将新的信息存入数据库，并且更新数据库中的置顶信息
+				newsDao.createNewsList(latestNewsList, topNews);
+
+				// 每次更新信息之后，都要将需要置顶的消息最后添加
+				NewsVo newTop = newsDao.getTopNews();
+				if (newTop != null)
+					newsList.addFirst(newsDao.getTopNews());
+
+				// 收到确认
+				Zdez.acknowledgeNews(newsList, prefs);
+				return latestNewsList.size();
+
+			} else if ("[]".equals(params[0])) {
+				return 0;
+			} else {
+				return -1;
+			}
+
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			if (result == 0) {
+				ToastUtil.showShortToast(getActivity(), "没有新信息");
+				if (DEBUG)
+					Log.d("SchoolMsgFragment", "Get latest error");
+			} else if (result > 0) {
+				// 提示刷新了几条新的信息
+				ToastUtil
+						.showShortToast(getActivity(), "加载了" + result + "条新信息");
+				setUnreadCountBadge();
+				// 通知列表数据有更新，需要刷新
+				adapter.notifyDataSetChanged();
+			} else {
+				ToastUtil.showShortToast(getActivity(), "网络错误，请检查网络连接");
+				Log.d(TAG, "Get latest error");
+			}
+
+			super.onPostExecute(result);
 		}
 
 	}
@@ -237,26 +288,27 @@ public class NewsFragment extends
 	 * @author werther
 	 * 
 	 */
-	private class UpdateTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// 在这里处理后台操作
-			// 首先发起网络请求，这个请求返回
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			// 在这里做一些ui主线程更新的操作，得到最新的列表，然后添加到现有的列表前面
-			// 包括两种情况：
-			// 一.新列表里含有最新的置顶消息，这样直接把这个列表添加到顶部就ok
-			// 二.新列表里面没有喊着新的置顶消息，置顶消息还是现有的，这样就要将这个新的列表插入到现有列表的置顶消息后面，即从index=1插入
-			
-			super.onPostExecute(result);
-		}
-
-	}
+	// private class UpdateTask extends AsyncTask<Void, Void, Void> {
+	//
+	// @Override
+	// protected Void doInBackground(Void... params) {
+	// // 在这里处理后台操作
+	// // 首先发起网络请求，这个请求返回
+	// // Do crazy thing here
+	// return null;
+	// }
+	//
+	// @Override
+	// protected void onPostExecute(Void result) {
+	// // 在这里做一些ui主线程更新的操作，得到最新的列表，然后添加到现有的列表前面
+	// // 包括两种情况：
+	// // 一.新列表里含有最新的置顶消息，这样直接把这个列表添加到顶部就ok
+	// // 二.新列表里面没有喊着新的置顶消息，置顶消息还是现有的，这样就要将这个新的列表插入到现有列表的置顶消息后面，即从index=1插入
+	//
+	// super.onPostExecute(result);
+	// }
+	//
+	// }
 
 	private class LoadMoreData extends
 			AsyncTask<Void, Void, LinkedList<NewsVo>> {
@@ -347,6 +399,10 @@ public class NewsFragment extends
 							+ ",Title:" + newsList.getLast().getTitle());
 				}
 			}
+			// 每次更新信息之后，都要将需要置顶的消息最后添加
+			NewsVo newTop = newsDao.getTopNews();
+			if (newTop != null)
+				newsList.addFirst(newTop);
 
 			return null;
 		}
@@ -404,6 +460,10 @@ public class NewsFragment extends
 							+ ",Title:" + newsList.getLast().getTitle());
 				}
 			}
+			// 每次更新信息之后，都要将需要置顶的消息最后添加
+			NewsVo newTop = newsDao.getTopNews();
+			if (newTop != null)
+				newsList.addFirst(newTop);
 
 			return null;
 		}

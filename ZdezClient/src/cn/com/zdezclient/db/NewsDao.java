@@ -58,15 +58,65 @@ public class NewsDao {
 	 * 
 	 * @param newsList
 	 */
-	public void createNewsList(LinkedList<NewsVo> newsList) {
+	public void createNewsList(LinkedList<NewsVo> newsList, NewsVo topNews) {
 		Iterator<NewsVo> it = newsList.iterator();
 		while (it.hasNext()) {
-			createNewsItem(it.next());
+			NewsVo news = it.next();
+			// 不是置顶消息，即topNews为null，如果是置顶消息的话在专门的函数里面处理置顶信息的更新
+			if (topNews == null || news.getIsTop() != 1)
+				createNewsItem(news);
 		}
+		if (topNews != null)
+			setTopNews(topNews);
+
 	}
 
 	/**
-	 * 从数据库中返回所有的newsList，按照创建时间排序 从news表中取出
+	 * 设置最新的置顶消息，并将原来的置顶信息取消置顶属性
+	 * 
+	 * @param topNews
+	 */
+	public void setTopNews(NewsVo topNews) {
+		// 先将目前的数据库中的置顶信息取消置顶
+		if (DEBUG)
+			Log.d(TAG,
+					"Start to update the top news in db, and the topnews shall not be null, it turn out:"
+							+ topNews.getId());
+		String updateSql = "update News set newsTop=0 where newsTop=1";
+		db.execSQL(updateSql);
+		// 然后插入新的置顶消息
+		createNewsItem(topNews);
+	}
+
+	/**
+	 * 返回目前在数据库中的最新的置顶信息，应该只有一条 并且这一条信息需要从所有数据中筛选出来
+	 * 
+	 * @return
+	 */
+	public NewsVo getTopNews() {
+		NewsVo news = null;
+		String sql = "select newsId as _id, "
+				+ "newsTitle, newsContent, newsDate, "
+				+ "newsReadStatus, newsCover, newsTop "
+				+ "from News where newsTop=1";
+		Cursor cursor = db.rawQuery(sql, null);
+		if (cursor.moveToFirst()) {
+			if (DEBUG)
+				Log.d(TAG, "Getted the top news, id :" + cursor.getInt(0));
+			news = new NewsVo();
+			news.setId(cursor.getInt(0));
+			news.setTitle(cursor.getString(1));
+			news.setContent(cursor.getString(2));
+			news.setDate(cursor.getString(3));
+			news.setReadStatus(cursor.getInt(4));
+			news.setCoverPath(cursor.getString(5));
+			news.setIsTop(cursor.getInt(6));
+		}
+		return news;
+	}
+
+	/**
+	 * 从数据库中返回所有的newsList，按照创建时间排序 从news表中取出 除去置顶消息
 	 * 
 	 * @return
 	 */
@@ -89,7 +139,8 @@ public class NewsDao {
 			newsItem.setReadStatus(cursor.getInt(4));
 			newsItem.setCoverPath(cursor.getString(5));
 			newsItem.setIsTop(cursor.getInt(6));
-			newsList.add(newsItem);
+			if (newsItem.getIsTop() == 0)
+				newsList.add(newsItem);
 			while (cursor.moveToNext()) {
 				NewsVo newsItem2 = new NewsVo();
 				newsItem2.setId(cursor.getInt(0));
@@ -99,7 +150,10 @@ public class NewsDao {
 				newsItem2.setReadStatus(cursor.getInt(4));
 				newsItem2.setCoverPath(cursor.getString(5));
 				newsItem2.setIsTop(cursor.getInt(6));
-				newsList.add(newsItem2);
+				if (DEBUG)
+					Log.d(TAG, "Next msg id:" + newsItem2.getId());
+				if (newsItem2.getIsTop() == 0)
+					newsList.add(newsItem2);
 			}
 		}
 
@@ -107,7 +161,7 @@ public class NewsDao {
 	}
 
 	/**
-	 * 按照给定的起始id和要求的数目取出最近的n条信息，用于分段加载信息
+	 * 按照给定的起始id和要求的数目取出最近的n条信息，用于分段加载信息 除去置顶信息
 	 * 
 	 * @param start
 	 * @param count
@@ -124,8 +178,9 @@ public class NewsDao {
 		} else {
 			sql = "select newsId as _id, "
 					+ "newsTitle, newsContent, newsDate, "
-					+ "newsReadStatus, newsCover, newsTop" + " from News where newsId<"
-					+ start + " order by newsDate desc limit " + count;
+					+ "newsReadStatus, newsCover, newsTop"
+					+ " from News where newsId<" + start
+					+ " order by newsDate desc limit " + count;
 		}
 
 		Cursor cursor = db.rawQuery(sql, null);
@@ -141,7 +196,8 @@ public class NewsDao {
 			newsItem.setReadStatus(cursor.getInt(4));
 			newsItem.setCoverPath(cursor.getString(5));
 			newsItem.setIsTop(cursor.getInt(6));
-			newsList.add(newsItem);
+			if (newsItem.getIsTop() == 0)
+				newsList.add(newsItem);
 			while (cursor.moveToNext()) {
 				NewsVo newsItem2 = new NewsVo();
 				newsItem2.setId(cursor.getInt(0));
@@ -151,7 +207,11 @@ public class NewsDao {
 				newsItem2.setReadStatus(cursor.getInt(4));
 				newsItem2.setCoverPath(cursor.getString(5));
 				newsItem2.setIsTop(cursor.getInt(6));
-				newsList.add(newsItem2);
+				if (DEBUG)
+					Log.d(TAG, "Next msg id:" + newsItem2.getId()
+							+ " And the istop is: " + newsItem2.getIsTop());
+				if (newsItem2.getIsTop() == 0)
+					newsList.add(newsItem2);
 			}
 		}
 

@@ -18,5 +18,6 @@
     <color name="facebookBlueDarker">#29447c</color>
     <color name="bar_gray">#e1e1e1</color>
     <color name="orange">#f34f06</color>
+    <color name="top_item_bg">#b9b9b9</color>
 
 </resources>

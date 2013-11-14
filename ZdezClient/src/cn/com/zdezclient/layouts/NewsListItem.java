@@ -54,6 +54,10 @@ public class NewsListItem extends RelativeLayout {
 			// Log.d(TAG, "没有封面图片，开始重新布局");
 			// deleteCover();
 		}
+
+		if (news.getIsTop() == 1) {
+			this.setBackgroundColor(Color.parseColor("#d6d6d6"));
+		}
 	}
 
 	private void deleteCover() {

@@ -299,7 +299,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		// 先显示一下当前版本名称
 		String title = getResources().getString(
 				R.string.pref_title_update_client)
-				+ " -----  V" + getVersionName();
+				+ " -----  " + getVersionName();
 		updateP.setTitle(title);
 		updateP.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
