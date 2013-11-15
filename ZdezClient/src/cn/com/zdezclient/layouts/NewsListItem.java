@@ -56,7 +56,7 @@ public class NewsListItem extends RelativeLayout {
 		}
 
 		if (news.getIsTop() == 1) {
-			this.setBackgroundColor(Color.parseColor("#d6d6d6"));
+			this.setBackgroundColor(Color.parseColor("#f5e7e1"));
 		}
 	}
 

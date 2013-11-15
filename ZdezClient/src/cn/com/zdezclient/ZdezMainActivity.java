@@ -260,6 +260,12 @@ public class ZdezMainActivity extends BaseActivity {
 		startActivity(browserIntent);
 	}
 
+	public void tobokewebsite(View view) {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+				Uri.parse(ZdezHTTPClient.BOKE_WEBSITE_URL));
+		startActivity(browserIntent);
+	}
+
 	// the meat of switching the above fragment
 	private void switchFragment(Fragment fragment) {
 		if (this instanceof ZdezMainActivity) {

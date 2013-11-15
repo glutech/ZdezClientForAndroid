@@ -39,6 +39,10 @@
         android:key="modify_psw"
         android:title="@string/_modify_psw" />
     <Preference 
+        android:key="feedback"
+        android:title="@string/_feedback_title"
+        />
+    <Preference 
         android:key="about"
         android:title="@string/_about"
         />

@@ -106,6 +106,10 @@
             android:name="cn.com.zdezclient.activities.NetWorkErrorMsgActivity"
             android:label="@string/title_activity_net_work_error_msg" >
         </activity>
+        <activity
+            android:name="cn.com.zdezclient.activities.FeedBackActivity"
+            android:label="@string/title_activity_feed_back" >
+        </activity>
     </application>
 
 </manifest>

@@ -30,6 +30,7 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.util.Log;
 import cn.com.zdezclient.activities.AboutActivity;
+import cn.com.zdezclient.activities.FeedBackActivity;
 import cn.com.zdezclient.activities.ModifyPswActivity;
 import cn.com.zdezclient.activities.Whatsnew;
 import cn.com.zdezclient.db.ZdezDataBaseHelper;
@@ -127,7 +128,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		// 设置修改密码点击的监听
 		setListenerForModifyPsw();
 
-		setListenerForAbout();
+		setListenerForAboutAndFeedBack();
 
 	}
 
@@ -179,7 +180,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 	}
 
-	private void setListenerForAbout() {
+	private void setListenerForAboutAndFeedBack() {
 		Preference aboutP = findPreference("about");
 
 		aboutP.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -188,6 +189,18 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				Intent intent = new Intent();
 				intent.setClass(SettingsActivity.this, AboutActivity.class);
+				startActivity(intent);
+				return false;
+			}
+		});
+
+		Preference feedBackP = findPreference("feedback");
+		feedBackP.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				Intent intent = new Intent();
+				intent.setClass(SettingsActivity.this, FeedBackActivity.class);
 				startActivity(intent);
 				return false;
 			}

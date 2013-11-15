@@ -28,11 +28,13 @@
     <string name="_about">关于我们</string>
     <string name="title_activity_net_work_error_msg">NetWorkErrorMsgActivity</string>
     <string name="_user_name_placeholder">用户名</string>
-    <string name="powered_by">Powered by 昆明博客科技</string>
+    <string name="powered_by">Powered by <u>昆明博客科技</u></string>
     <string name="_connect_error">！！网络连接错误！！</string>
     <string name="_column_title_news">资讯频道</string>
     <string name="_column_title_schoolmsg">校园通知</string>
     <string name="_column_title_zdezmsg">找得着</string>
     <string name="_column_title_setting">设置</string>
+    <string name="_feedback_title">意见反馈</string>
+    <string name="title_activity_feed_back">FeedBackActivity</string>
 
 </resources>
