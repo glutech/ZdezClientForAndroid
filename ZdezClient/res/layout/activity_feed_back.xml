@@ -1,0 +1,70 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ModifyPswActivity" >
+
+    <!-- Login progress -->
+
+    <LinearLayout
+        android:id="@+id/feed_back_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/feed_back_status_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/login_progress_signing_in"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <!-- Login form -->
+
+    <ScrollView
+        android:id="@+id/feedback_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background" >
+
+        <LinearLayout
+            style="@style/LoginFormContainer"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/feedback_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_editbox"
+                android:hint="感谢你真挚的反馈"
+                android:lines="10"
+                android:maxLines="15"
+                android:minLines="3" />
+
+            <Button
+                android:id="@+id/send_feedback"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btn_style_login"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="发送"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</merge>
