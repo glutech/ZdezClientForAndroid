@@ -30,7 +30,7 @@ public class FeedBackActivity extends SherlockActivity {
 	private final static boolean DEBUG = ZdezPreferences.getDebug();
 	private final static String TAG = FeedBackActivity.class.getSimpleName();
 
-	private String feedBackStr;
+	private String feedbackStr;
 
 	private EditText feedBackV;
 	private Button sendBtn;
@@ -67,11 +67,11 @@ public class FeedBackActivity extends SherlockActivity {
 	public void attemptSend() {
 		feedBackV.setError(null);
 
-		feedBackStr = feedBackV.getText().toString();
+		feedbackStr = feedBackV.getText().toString();
 		boolean cancel = false;
 		View focusView = null;
 
-		if (TextUtils.isEmpty(feedBackStr)) {
+		if (TextUtils.isEmpty(feedbackStr)) {
 			feedBackV.setError("请填写反馈意见再提交");
 			focusView = feedBackV;
 			cancel = true;
@@ -134,7 +134,8 @@ public class FeedBackActivity extends SherlockActivity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(FeedBackActivity.this);
 		RequestParams params = new RequestParams();
-		params.put("id", ZdezPreferences.getUserId(prefs));
+		params.put("user_id", ZdezPreferences.getUserId(prefs));
+		params.put("feedback", feedbackStr);
 		ZdezHTTPClient.post(ZdezHTTPClient.SEND_FEEDBACK_SERVLET_NAME, params,
 				new AsyncHttpResponseHandler() {
 
