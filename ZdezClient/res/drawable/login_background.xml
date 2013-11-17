@@ -7,8 +7,8 @@
         android:angle="20"
         android:centerX="0%"
         android:centerY="0%p"
-        android:startColor="@color/facebookBlueLight"
-        android:endColor="@color/facebookBlueDarker"
+        android:startColor="@color/orange_light"
+        android:endColor="@color/orange"
         android:type="radial" />
 
 </shape>
