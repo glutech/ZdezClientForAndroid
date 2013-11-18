@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/abs__action_bar_default_height"
+    android:background="@drawable/btn_logout"
+    android:text="@string/pref_logout"
+    android:textSize="18sp"
+    android:gravity="center"
+    android:textColor="@color/white" >
+
+</TextView>

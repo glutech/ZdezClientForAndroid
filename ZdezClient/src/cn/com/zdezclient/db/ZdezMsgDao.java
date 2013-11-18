@@ -36,12 +36,11 @@ public class ZdezMsgDao {
 		ContentValues cv = new ContentValues();
 		cv.put("zdezId", zdez.getZdezMsgId());
 		cv.put("zdezTitle", zdez.getTitle());
-		cv.put("zdezContent", UriConverter.replaceSrc(zdez.getContent()));
+		cv.put("zdezContent", zdez.getContent());
 		cv.put("zdezDate", zdez.getDate());
 		cv.put("zdezReadStatus", zdez.getReadStatus());
 		if (zdez.getCoverPath() != null && !zdez.getCoverPath().equals(""))
-			cv.put("zdezCover",
-					UriConverter.replaceCoverPath(zdez.getCoverPath()));
+			cv.put("zdezCover", zdez.getCoverPath());
 
 		db.insert("ZdezMsg", null, cv);
 	}

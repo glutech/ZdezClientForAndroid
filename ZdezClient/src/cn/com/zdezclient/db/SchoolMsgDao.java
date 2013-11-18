@@ -43,15 +43,14 @@ public class SchoolMsgDao {
 		cv.put("schoolMsgId", msg.getSchoolMsgId());
 		cv.put("schoolMsgTitle", msg.getTitle());
 		// 插入
-		cv.put("schoolMsgContent", UriConverter.replaceSrc(msg.getContent()));
+		cv.put("schoolMsgContent", msg.getContent());
 		cv.put("schoolMsgDate", msg.getDate());
 		cv.put("schoolMsgSenderName", msg.getSenderName());
 		cv.put("schoolMsgSchoolName", msg.getSchoolName());
 		cv.put("schoolMsgReadStatus", msg.getReadStatus());
 		cv.put("schoolMsgRemarks", msg.getRemarks());
 		if (msg.getCoverPath() != null && !msg.getCoverPath().equals(""))
-			cv.put("schoolMsgCover",
-					UriConverter.replaceCoverPath(msg.getCoverPath()));
+			cv.put("schoolMsgCover", msg.getCoverPath());
 
 		db.insert("SchoolMsg", null, cv);
 	}

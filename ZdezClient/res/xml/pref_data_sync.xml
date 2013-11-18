@@ -33,18 +33,24 @@
         android:title="@string/pref_title_tutorial" >
     </Preference>
     <Preference
-        android:key="log_out"
-        android:title="@string/pref_logout" />
-    <Preference
         android:key="modify_psw"
         android:title="@string/_modify_psw" />
-    <Preference 
+    <Preference
         android:key="feedback"
-        android:title="@string/_feedback_title"
-        />
-    <Preference 
+        android:title="@string/_feedback_title" />
+    <Preference
         android:key="about"
-        android:title="@string/_about"
+        android:title="@string/_about" />
+    
+    <Preference 
+        android:enabled="false"
+        />
+    <Preference
+        android:key="log_out"
+        android:title="@string/pref_logout"
+         />
+    <Preference 
+        android:enabled="false"
         />
 
 </PreferenceScreen>

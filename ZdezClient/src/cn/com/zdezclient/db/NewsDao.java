@@ -42,13 +42,12 @@ public class NewsDao {
 		ContentValues cv = new ContentValues();
 		cv.put("newsId", news.getId());
 		cv.put("newsTitle", news.getTitle());
-		cv.put("newsContent", UriConverter.replaceSrc(news.getContent()));
+		cv.put("newsContent", news.getContent());
 		cv.put("newsDate", news.getDate());
 		cv.put("newsReadStatus", news.getReadStatus());
 		cv.put("newsTop", news.getIsTop());
 		if (news.getCoverPath() != null && !news.getCoverPath().equals(""))
-			cv.put("newsCover",
-					UriConverter.replaceCoverPath(news.getCoverPath()));
+			cv.put("newsCover", news.getCoverPath());
 
 		db.insert("News", null, cv);
 	}

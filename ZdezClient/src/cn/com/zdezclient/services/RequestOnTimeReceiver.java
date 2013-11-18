@@ -2,6 +2,7 @@ package cn.com.zdezclient.services;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
 
@@ -26,6 +27,7 @@ import cn.com.zdezclient.db.SchoolMsgDao;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
 import cn.com.zdezclient.types.SchoolMsgVo;
+import cn.com.zdezclient.utils.UriConverter;
 import cn.com.zdezclient.utils.ZdezCharsetUtil;
 
 import com.google.gson.Gson;
@@ -155,6 +157,17 @@ public class RequestOnTimeReceiver extends BroadcastReceiver {
 			final Gson gson = new Gson();
 			SchoolMsgVo[] msgArray = {};
 			msgArray = gson.fromJson(arg0, SchoolMsgVo[].class);
+
+			// 在存储之前先处理 uri
+			if (msgArray != null && msgArray.length > 0) {
+				for (int i = msgArray.length - 1; i >= 0; i--) {
+					SchoolMsgVo msg = msgArray[i];
+					msg.setCoverPath(UriConverter.replaceCoverPath(msg
+							.getCoverPath()));
+					msg.setContent(UriConverter.replaceSrc(msg.getContent()));
+				}
+			}
+
 			msgList.addAll(Arrays.asList(msgArray));
 
 			// 先存储到数据库中

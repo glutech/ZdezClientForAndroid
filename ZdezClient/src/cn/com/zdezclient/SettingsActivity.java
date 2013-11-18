@@ -224,6 +224,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 	private void setListenerForLogOut() {
 		Preference logout = findPreference("log_out");
+		logout.setLayoutResource(R.layout.logout_view);
 		logout.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 			@Override
