@@ -3,10 +3,10 @@ package cn.com.zdezclient.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,9 +22,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import cn.com.zdezclient.ActivityContrl;
 import cn.com.zdezclient.R;
+import cn.com.zdezclient.SettingsActivity;
+import cn.com.zdezclient.ZdezMainActivity;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -32,7 +36,7 @@ import com.loopj.android.http.RequestParams;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class ModifyPswActivity extends Activity {
+public class ModifyPswActivity extends SherlockActivity {
 
 	private final static boolean DEBUG = ZdezPreferences.getDebug();
 	private final static String TAG = ModifyPswActivity.class.getSimpleName();
@@ -53,7 +57,9 @@ public class ModifyPswActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setIcon(
+				getResources().getDrawable(R.drawable.arrow_back));
 		setContentView(R.layout.activity_modify_psw);
 		ActivityContrl.add(this);
 
@@ -87,12 +93,6 @@ public class ModifyPswActivity extends Activity {
 				});
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.modify_psw, menu);
-		return true;
-	}
 
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
@@ -286,6 +286,29 @@ public class ModifyPswActivity extends Activity {
 					}
 
 				});
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.abs__up:
+			Intent intent = new Intent();
+			intent.setClass(ModifyPswActivity.this, ZdezMainActivity.class);
+			startActivity(intent);
+			finish();
+			break;
+		case R.id.abs__home:
+			Intent intent2 = new Intent();
+			intent2.setClass(ModifyPswActivity.this, ZdezMainActivity.class);
+			startActivity(intent2);
+			finish();
+			break;
+		default:
+			break;
+		}
+		finish();
+		return super.onOptionsItemSelected(item);
 	}
 	// /**
 	// * Represents an asynchronous login/registration task used to authenticate

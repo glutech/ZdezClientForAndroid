@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +19,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import cn.com.zdezclient.ActivityContrl;
 import cn.com.zdezclient.R;
+import cn.com.zdezclient.ZdezMainActivity;
 import cn.com.zdezclient.internet.ZdezHTTPClient;
 import cn.com.zdezclient.preference.ZdezPreferences;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -196,6 +199,29 @@ public class FeedBackActivity extends SherlockActivity {
 
 				});
 
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.abs__up:
+			Intent intent = new Intent();
+			intent.setClass(FeedBackActivity.this, ZdezMainActivity.class);
+			startActivity(intent);
+			finish();
+			break;
+		case R.id.abs__home:
+			Intent intent2 = new Intent();
+			intent2.setClass(FeedBackActivity.this, ZdezMainActivity.class);
+			startActivity(intent2);
+			finish();
+			break;
+		default:
+			break;
+		}
+		finish();
+		return super.onOptionsItemSelected(item);
 	}
 
 }
