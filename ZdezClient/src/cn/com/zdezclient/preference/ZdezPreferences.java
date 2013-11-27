@@ -24,7 +24,7 @@ public class ZdezPreferences {
 	// private static final String PREFERENCE_BIRTHDATE = "birthdate";
 	private static final String PREFERENCE_GENDER = "gender";
 	private static final boolean DEBUG = true;
-	private static final int KEEP_ALIVE_SECONDS = 20;
+	private static final int KEEP_ALIVE_SECONDS = 300;
 	public static final int NUMBER_OF_EACH_LOAD_IN_LIST = 20;
 	private static final String RECEIVER_NAME = "cn.com.zdez.pull";
 
