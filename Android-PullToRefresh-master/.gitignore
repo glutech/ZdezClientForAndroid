@@ -3,8 +3,8 @@ bin
 gen
 
 #Eclipse
-.project
-.classpath
+#.project
+#.classpath
 .settings
 
 #IntelliJ IDEA

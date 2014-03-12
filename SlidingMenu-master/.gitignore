@@ -15,6 +15,6 @@ gen
 .metadata
 .idea/
 .idea
-*.project
+#*.project
 .DS_Store
 target/
