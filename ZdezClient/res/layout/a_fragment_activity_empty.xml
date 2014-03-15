@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/a_panel_bg_light"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+
+        android:background="@drawable/a_bg_li_activity_list_root">
+
+        <TextView
+            android:id="@+id/a_activity_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:text="暂无活动，您可以立即创建一个活动\n|\n您还没有参与任何活动"
+            android:textSize="@dimen/a_text_size_small"
+            android:textColor="@color/a_text_dark"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center_vertical|center_horizontal"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

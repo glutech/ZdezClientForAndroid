@@ -11,5 +11,13 @@
 
     <integer name="num_cols">1</integer>
     <dimen name="webview_margin">30dp</dimen>
+    
+    <dimen name="a_text_size_micro">12sp</dimen>
+    <dimen name="a_text_size_small">14sp</dimen>
+    <dimen name="a_text_size_medium">18sp</dimen>
+    <dimen name="a_text_size_large">24sp</dimen>
+    <dimen name="a_text_size_large_x">30sp</dimen>
+    <dimen name="a_text_size_large_xx">36sp</dimen>
+    <dimen name="a_text_size_large_xxx">42sp</dimen>
 
 </resources>

@@ -34,11 +34,11 @@
         <activity
             android:name="cn.com.zdezclient.WelcomeActivity"
             android:label="@string/title_activity_welcome" >
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name="cn.com.zdezclient.ZdezMainActivity"
@@ -109,6 +109,16 @@
         <activity
             android:name="cn.com.zdezclient.activities.FeedBackActivity"
             android:label="@string/title_activity_feed_back" >
+        </activity>
+        
+        <activity
+            android:name="cn.com.zdezclient.a_activities.IndexActivity"
+            android:label="活动示例起始页"
+            android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

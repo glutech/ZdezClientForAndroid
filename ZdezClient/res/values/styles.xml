@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <style name="MyCustomTheme" parent="Theme.Sherlock.Light">
         <item name="homeAsUpIndicator">@drawable/home</item>
-        <item name="android:homeAsUpIndicator">@drawable/home</item>
+        <item name="android:homeAsUpIndicator" tools:targetApi="11">@drawable/home</item>
         <!--
         <item name="actionButtonStyle">@style/MyActionButtonStyle</item>
         <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
         -->
         <item name="actionBarStyle">@style/Widget.MyTheme.ActionBar</item>
-        <item name="android:actionBarStyle">@style/Widget.MyTheme.ActionBar</item>
+        <item name="android:actionBarStyle" tools:targetApi="11">@style/Widget.MyTheme.ActionBar</item>
     </style>
 
     <style name="Widget.Sherlock.ActionButton.Home">
@@ -26,7 +26,7 @@
     <style name="Widget.MyTheme.ActionBar" parent="Widget.Sherlock.ActionBar">
         <item name="android:background">@color/orange</item>
         <item name="background">@color/orange</item>
-        <item name="android:titleTextStyle">@style/Widget.ActionBar.TitleTextStyle</item>
+        <item name="android:titleTextStyle" tools:targetApi="11">@style/Widget.ActionBar.TitleTextStyle</item>
         <item name="titleTextStyle">@style/Widget.ActionBar.TitleTextStyle</item>
     </style>
 
@@ -55,6 +55,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
+    </style>
+    
+    <style name="a_SpinnerOnBottomBar" parent="Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/abs__item_background_holo_light</item>
     </style>
 
 </resources>

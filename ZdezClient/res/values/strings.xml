@@ -36,5 +36,22 @@
     <string name="_column_title_setting">设置</string>
     <string name="_feedback_title">意见反馈</string>
     <string name="title_activity_feed_back">FeedBackActivity</string>
+    
+    <string-array name="a_activity_query_time">
+        <item>不限时间</item>
+        <item>今天</item>
+        <item>明天</item>
+        <item>周末</item>
+    </string-array>
+    <string-array name="a_activity_query_category">
+        <item>所有类型</item>
+        <item>音乐现场</item>
+        <item>戏剧演出</item>
+        <item>讲座电影</item>
+        <item>聚会玩乐</item>
+        <item>展览展会</item>
+        <item>体育运动</item>
+        <item>其他类型</item>
+    </string-array>
 
 </resources>
